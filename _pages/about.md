@@ -1,56 +1,242 @@
 ---
+layout: archive
 permalink: /
-title: "Academic Pages is a ready-to-fork GitHub Pages template for academic personal websites"
+title: "About me"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
+header:
+  overlay_image: ../images/headers/ChatGPT Image Apr 24, 2026, 01_27_49 PM.png
+  caption: "<small>AI Generated image</small>"
+  # overlay_filter: 0.2 # same as adding an opacity of 0.5 to a black background
 ---
 
-This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the repository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. Incidentally, these same features make it a great template for anyone that needs to show off a professional template!
+# About me
 
- You can fork [this template](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and Markdown files, add your own PDFs and other content, and have your own site for free, with no ads!
 
-A data-driven personal website
-======
-Like many other Jekyll-based GitHub Pages templates, Academic Pages makes you separate the website's content from its form. The content & metadata of your website are in structured Markdown files, while various other files constitute the theme, specifying how to transform that content & metadata into HTML pages. You keep these various Markdown (.md), YAML (.yml), HTML, and CSS files in a public GitHub repository. Each time you commit and push an update to the repository, the [GitHub pages](https://pages.github.com/) service creates static HTML pages based on these files, which are hosted on GitHub's servers free of charge.
+I am a postodoctoral fellow at MIT where I focus on nuclear theory calculations to assist searches for beyond the Standard Model physics using the atomic nucleus and applications of machine learning to accelerate otherwise costly many-body calculations.
 
-Many of the features of dynamic content management systems (like Wordpress) can be achieved in this fashion, using a fraction of the computational resources and with far less vulnerability to hacking and DDoSing. You can also modify the theme to your heart's content without touching the content of your site. If you get to a point where you've broken something in Jekyll/HTML/CSS beyond repair, your Markdown files describing your talks, publications, etc. are safe. You can rollback the changes or even delete the repository and start over - just be sure to save the Markdown files! You can also write scripts that process the structured data on the site, such as [this one](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb) that analyzes metadata in pages about talks to display [a map of every location you've given a talk](https://academicpages.github.io/talkmap.html).
+# Recent Publications
 
-For those users that need more advanced functionality, the template also supports the following popular tools:
-- [MathJax](https://www.mathjax.org/) for mathematical equations
-- [Mermaid](https://mermaid.js.org/) for diagraming
-- [Plotly](https://plotly.com/javascript/) for plotting
+---
 
-Getting started
-======
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this template](https://github.com/academicpages/academicpages.github.io) by clicking the "Use this template" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](https://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
+<style>
+/
+.page__content h2,
+.page__content h3 {
+  border-bottom: none !important;
+}
+.paper-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 20px;
+  border-radius: 10px;
+  background: var(--global-bg-color, #f9f9f9);
+  border: 1px solid var(--global-border-color, #eee);
+  transition: box-shadow 0.3s ease;
+}
 
-Site-wide configuration
-------
-The main configuration file for the site is in the base directory in [_config.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_config.yml), which defines the content in the sidebars and other site-wide features. You will need to replace the default variables with ones about yourself and your site's github repository. The configuration file for the top menu is in [_data/navigation.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_data/navigation.yml). For example, if you don't have a portfolio or blog posts, you can remove those items from that navigation.yml file to remove them from the header. 
+.paper-card:hover {
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
 
-Create content & metadata
-------
-For site content, there is one Markdown file for each type of content, which are stored in directories like _publications, _talks, _posts, _teaching, or _pages. For example, each talk is a Markdown file in the [_talks directory](https://github.com/academicpages/academicpages.github.io/tree/master/_talks). At the top of each Markdown file is structured data in YAML about the talk, which the theme will parse to do lots of cool stuff. The same structured data about a talk is used to generate the list of talks on the [Talks page](https://academicpages.github.io/talks), each [individual page](https://academicpages.github.io/talks/2012-03-01-talk-1) for specific talks, the talks section for the [CV page](https://academicpages.github.io/cv), and the [map of places you've given a talk](https://academicpages.github.io/talkmap.html) (if you run this [python file](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.py) or [Jupyter notebook](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb), which creates the HTML for the map based on the contents of the _talks directory).
+.paper-image-container {
+  position: relative;
+  flex: 0 0 260px;
+  width: 260px;
+  height: 160px;
+  margin-right: 25px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--global-border-color, #eee);
+}
 
-**Markdown generator**
+.paper-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+  z-index: 2;
+}
 
-The repository includes [a set of Jupyter notebooks](https://github.com/academicpages/academicpages.github.io/tree/master/markdown_generator
-) that converts a CSV containing structured data about talks or presentations into individual Markdown files that will be properly formatted for the Academic Pages template. The sample CSVs in that directory are the ones I used to create my own personal website at stuartgeiger.com. My usual workflow is that I keep a spreadsheet of my publications and talks, then run the code in these notebooks to generate the Markdown files, then commit and push them to the GitHub repository.
+.badge-arxiv {
+  background: linear-gradient(135deg, #b31b1b, #8b0000);
+}
 
-How to edit your site's GitHub repository
-------
-Many people use a git client to create files on their local computer and then push them to GitHub's servers. If you are not familiar with git, you can directly edit these configuration and Markdown files directly in the github.com interface. Navigate to a file (like [this one](https://github.com/academicpages/academicpages.github.io/blob/master/_talks/2012-03-01-talk-1.md) and click the pencil icon in the top right of the content preview (to the right of the "Raw | Blame | History" buttons). You can delete a file by clicking the trashcan icon to the right of the pencil icon. You can also create new files or upload files by navigating to a directory and clicking the "Create new file" or "Upload files" buttons. 
+.badge-PRL {
+  background: linear-gradient(135deg, #1bb379, #1bb379c0);
+}
 
-Example: editing a Markdown file for a talk
-![Editing a Markdown file for a talk](/images/editing-talk.png)
+.paper-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
 
-For more info
-------
-More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/), the [growing wiki](https://github.com/academicpages/academicpages.github.io/wiki), and you can always [ask a question on GitHub](https://github.com/academicpages/academicpages.github.io/discussions). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+.paper-image-container:hover .paper-image {
+  transform: scale(1.08);
+}
+
+.paper-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.paper-meta {
+  font-size: 12px;
+  color: var(--global-text-color, #888);
+  margin-bottom: 8px;
+}
+
+.paper-title {
+  font-size: 17px;
+  font-weight: bold;
+  color: var(--global-text-color, #333);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.paper-authors {
+  font-size: 13px;
+  color: var(--global-text-color, #666);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.paper-authors .highlight {
+  color: var(--global-text-color, #666);
+  font-weight: bold;
+}
+
+.paper-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.paper-card .paper-links a.btn {
+  display: inline-block !important;
+  padding: 6px 14px !important;
+  min-width: 80px !important;
+  text-align: center !important;
+  border-radius: 5px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+  border: 2px solid transparent !important;
+  transition: all 0.3s ease !important;
+}
+
+.paper-card .paper-links a.btn.btn-arxiv {
+  background-color: #b31b1b !important;
+  border-color: #b31b1b !important;
+  color: #ffffff !important;
+}
+.paper-card .paper-links a.btn.btn-arxiv:hover {
+  background-color: transparent !important;
+  color: #b31b1b !important;
+}
+
+.paper-card .paper-links a.btn.btn-github {
+  background-color:  #24292e !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+.paper-card .paper-links a.btn.btn-github:hover {
+  background-color: #ffffff !important;
+  color: #24292e !important;
+}
+
+.paper-card .paper-links a.btn.btn-project {
+  background-color: var(--global-link-color, #EBCF53) !important;
+  border-color: var(--global-link-color, #EBCF53) !important;
+  color: #ffffff !important;
+}
+.paper-card .paper-links a.btn.btn-project:hover {
+  background-color: transparent !important;
+  color: var(--global-link-color, #EBCF53) !important;
+}
+
+.paper-card .paper-links a.btn.btn-link {
+  background-color: #ffffff !important;
+  border-color: #24292e  !important;
+  color: #24292e  !important;
+}
+.paper-card .paper-links a.btn.btn-link:hover {
+  background-color: #24292e !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+  .paper-card {
+    flex-direction: column;
+  }
+  .paper-image-container {
+    width: 100%;
+    flex: none;
+    height: 180px;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+}
+</style>
+<!-- Paper 1: FRAME-->
+<div class="paper-card">
+  <a href="https://arxiv.org/abs/2603.26905">
+  <div class="paper-image-container">
+    <span class="paper-badge badge-arxiv">arXiv</span>
+    <img class="paper-image" src="./images/papers/frame_arch_upd.png" alt="Frame_diagram">
+  </div>
+  </a>
+  <div class="paper-content">
+    <div class="paper-meta">Mar 2026 · arXiv Preprint</div>
+    <div class="paper-title">
+      Linking Electromagnetic Moments to Nuclear Interactions with a Global Physics-Driven Machine-Learning Emulator
+    </div>
+    <div class="paper-authors">
+      Jose M. Munoz, <span class="highlight">Antoine Belley</span>, Andreas Ekström, Gaute Hagen, Jason D. Holt, Ronald F. Garcia Ruiz
+    </div>
+    <div class="paper-links">
+      <a href="https://arxiv.org/abs/2603.26905" class="btn btn-arxiv">arXiv</a>
+      <a href="https://github.com/munozariasjm/FRAME-public" class="btn btn-github">GitHub</a>
+    </div>
+  </div>
+</div>
+
+<!-- Paper 2: Bannane-->
+<div class="paper-card">
+  <a href="https://journals.aps.org/prl/abstract/10.1103/mvc3-qdtc">
+  <div class="paper-image-container">
+    <span class="paper-badge badge-PRL">PRL</span>
+    <img class="paper-image" src="./images/papers/bannane_diagram_deltas_shared_emax.jpg" alt="Bannane_diagram">
+  </div>
+  </a>
+  <div class="paper-content">
+    <div class="paper-meta">Feb 2026 · Physical Review Letters</div>
+    <div class="paper-title">
+      Global Framework for Emulation of Nuclear Calculations
+    </div>
+    <div class="paper-authors">
+      <span class="highlight">Antoine Belley</span>, Jose M. Munoz, Ronald F. Garcia Ruiz
+    </div>
+    <div class="paper-links">
+      <a href="https://journals.aps.org/prl/abstract/10.1103/mvc3-qdtc" class="btn btn-link">Link</a>
+      <a href="https://arxiv.org/abs/2502.20363" class="btn btn-arxiv">arXiv</a>
+      <a href="https://github.com/munozariasjm/paper_o_bannane" class="btn btn-github">GitHub</a>
+    </div>
+  </div>
+</div>
+
+
+

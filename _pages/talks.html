@@ -3,6 +3,9 @@ layout: archive
 title: "Talks and presentations"
 permalink: /talks/
 author_profile: true
+header:
+  overlay_image: ../images/headers/preview.jpg
+  caption: "<small>Designed by [Rocketpixel / Freepik](http://freepik.com)</small>"
 ---
 
 {% if site.talkmap_link == true %}
@@ -11,6 +14,68 @@ author_profile: true
 
 {% endif %}
 
-{% for post in site.talks reversed %}
-  {% include archive-single-talk.html %}
-{% endfor %}
+<style>
+  details {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5em 0.5em 0;
+    margin-bottom: 1em;
+  }
+
+  summary {
+    font-weight: bold;
+    margin: -0.5em -0.5em 0;
+    padding: 0.5em;
+    cursor: pointer;
+  }
+
+  details[open] {
+    padding: 0.5em;
+  }
+</style>
+
+<details>
+  <summary>Invited Seminars and Colloquia</summary>
+  <ul>
+    {% for post in site.seminars reversed %}
+    <li>
+      {% include archive-single-talk.html %}
+    </li>
+    {% endfor %}
+  </ul>
+</details>
+
+<details>
+  <summary>Invited Conference Presentations</summary>
+  <ul>
+    {% for post in site.invitedtalks reversed %}
+    <li>
+      {% include archive-single-talk.html %}
+    </li>
+    {% endfor %}
+  </ul>
+</details>
+
+<details>
+  <summary>Contributed Conference Presentations</summary>
+  <ul>
+    {% for post in site.contributedtalks reversed %}
+    <li>
+      {% include archive-single-talk.html %}
+    </li>
+    {% endfor %}
+  </ul>
+</details>
+
+<details>
+  <summary>Evaluation Committee Meetings</summary>
+  <ul>
+    {% for post in site.committeemeetings reversed %}
+    <li>
+      {% include archive-single-talk.html %}
+    </li>
+    {% endfor %}
+  </ul>
+</details>
+
+

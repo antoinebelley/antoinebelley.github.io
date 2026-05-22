@@ -3,34 +3,568 @@ layout: archive
 title: "Publications"
 permalink: /publications/
 author_profile: true
+header:
+  overlay_image: ../images/headers/preview.jpg
+  caption: "<small>Designed by [Rocketpixel / Freepik](http://freepik.com)</small>"
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
+<style>
+  .pub-filter-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--global-bg-color);
+    border: 1px solid var(--global-border-color);
+    border-radius: 10px;
+  }
 
-{% include base_path %}
+  .pub-filter-group {
+    margin-bottom: 15px;
+  }
 
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
+  .pub-filter-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .pub-filter-label {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--global-text-color);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .pub-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pub-filter-btn {
+    padding: 6px 14px;
+    border: 2px solid var(--global-border-color);
+    border-radius: 20px;
+    background: var(--global-bg-color);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--global-text-color);
+    outline: none;
+  }
+
+  .pub-filter-btn:hover {
+    border-color: var(--global-link-color);
+    color: var(--global-link-color);
+  }
+
+  .pub-filter-btn.active {
+    background: var(--global-link-color) !important;
+    border-color: var(--global-link-color) !important;
+    color: #fff !important;
+    font-weight: 600;
+  }
+
+  .pub-year-divider {
+    display: flex;
+    align-items: center;
+    margin: 30px 0 20px 0;
+  }
+
+  .pub-year-divider .year-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--global-text-color);
+    padding-right: 20px;
+  }
+
+  .pub-year-divider .year-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--global-link-color), transparent);
+  }
+
+  .pub-paper-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--global-bg-color);
+    border: 1px solid var(--global-border-color);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .pub-paper-card:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .pub-paper-card.pub-hidden {
+    display: none !important;
+  }
+
+  .pub-paper-image-container {
+    position: relative;
+    flex: 0 0 260px;
+    width: 260px;
+    height: 160px;
+    margin-right: 25px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+  }
+
+  .pub-paper-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+    z-index: 2;
+  }
+
+  .pub-badge-arxiv {
+    background: linear-gradient(135deg, #b31b1b, #8b0000);
+  }
+
+  .pub-badge-cvpr {
+    background: linear-gradient(135deg, #0066cc, #004999);
+  }
+
+  .pub-badge-iccv {
+    background: linear-gradient(135deg, #6a1b9a, #4a148c);
+  }
+
+  .pub-badge-eccv {
+    background: linear-gradient(135deg, #00695c, #004d40);
+  }
+
+  .pub-badge-neurips {
+    background: linear-gradient(135deg, #5c6bc0, #3949ab);
+  }
+
+  .pub-badge-icml {
+    background: linear-gradient(135deg, #ef6c00, #e65100);
+  }
+
+  .pub-badge-aaai {
+    background: linear-gradient(135deg, #1565c0, #0d47a1);
+  }
+
+  .pub-badge-underreview {
+    background: linear-gradient(135deg, #ff9800, #e65100);
+  }
+
+  .pub-badge-PRL {
+  background: linear-gradient(135deg, #1bb379, #1bb379c0);
+  }
+
+  .pub-paper-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .pub-paper-image-container:hover .pub-paper-image {
+    transform: scale(1.08);
+  }
+
+  .pub-paper-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .pub-paper-meta {
+    font-size: 12px;
+    color: var(--global-text-color);
+    margin-bottom: 8px;
+  }
+
+  .pub-paper-title-row {
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .pub-paper-title {
+    font-size: 17px;
+    font-weight: bold;
+    color: var(--global-text-color);
+  }
+
+  .pub-paper-stats {
+    display: inline-flex;
+    gap: 6px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .pub-stat-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    background: var(--global-border-color);
+    color: #fafafa;
+    white-space: nowrap;
+  }
+
+  .pub-paper-authors {
+    font-size: 13px;
+    color: var(--global-text-color);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .pub-paper-authors .highlight {
+    color: var(--global-text-color);
+    font-weight: bold;
+  }
+
+  .pub-paper-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .pub-paper-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--global-border-color);
+    border-radius: 12px;
+    font-size: 11px;
+    color: #fafafa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none !important;
+    border: none;
+  }
+
+  .pub-paper-tag:hover {
+    background: var(--global-link-color);
+    color: #fff;
+  }
+
+  .pub-paper-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .pub-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    min-width: 80px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none !important;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .pub-btn-arxiv {
+    background-color: #b31b1b;
+    border-color: #b31b1b;
+    color: #ffffff !important;
+  }
+
+  .pub-btn-arxiv:hover {
+    background-color: transparent !important;
+    color: #b31b1b !important;
+  }
+
+  .pub-btn-github {
+    background-color: #24292e;
+    border-color: #24292e;
+    color: #ffffff !important;
+  }
+
+  .pub-btn-github:hover {
+    background-color: transparent !important;
+    color: #24292e !important;
+  }
+
+  .pub-btn-project {
+    background-color: var(--global-link-color);
+    border-color: var(--global-link-color);
+    color: #ffffff !important;
+  }
+
+  .pub-btn-project:hover {
+    background-color: transparent !important;
+    color: var(--global-link-color) !important;
+  }
+
+  .pub-btn-link {
+    background-color: #ffffff !important;
+    border-color: #24292e  !important;
+    color: #24292e  !important;
+  }
+
+  .pub-btn-link:hover {
+    background-color: #24292e !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+  }
+
+  .pub-btn-pdf {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    color: #ffffff !important;
+  }
+
+  .pub-btn-pdf:hover {
+    background-color: transparent !important;
+    color: #e74c3c !important;
+  }
+
+  .pub-no-results {
+    text-align: center;
+    padding: 40px;
+    color: var(--global-text-color-light);
+    font-size: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .pub-paper-card {
+      flex-direction: column;
+    }
+
+    .pub-paper-image-container {
+      width: 100%;
+      flex: none;
+      height: 180px;
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+
+    .pub-filter-buttons {
+      gap: 6px;
+    }
+
+    .pub-filter-btn {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+  }
+
+  .pub-author-notes {
+    text-align: right;
+    margin: -10px 0 20px 0;
+    font-size: 12px;
+    color: var(--global-text-color);
+    font-style: italic;
+  }
+
+  .pub-note-divider {
+    margin: 0 10px;
+    color: var(--global-border-color);
+  }
+</style>
+
+<!-- Filter Section -->
+<div class="pub-filter-section">
+  <div class="pub-filter-group">
+    <span class="pub-filter-label">📅 Year</span>
+    <div class="pub-filter-buttons" id="pub-year-btns">
+      <span class="pub-filter-btn active" data-year="all">All</span>
+      <span class="pub-filter-btn" data-year="2026">2026</span>
+      <span class="pub-filter-btn" data-year="2025">2025</span>
+      <span class="pub-filter-btn" data-year="2024">2024</span>
+      <span class="pub-filter-btn" data-year="2023">2023</span>
+      <span class="pub-filter-btn" data-year="2022">2022</span>
+    </div>
+  </div>
+
+  <div class="pub-filter-group">
+    <span class="pub-filter-label">🏷️ Topics</span>
+    <div class="pub-filter-buttons" id="pub-topic-btns">
+      <span class="pub-filter-btn active" data-topic="all">All</span>
+      <span class="pub-filter-btn" data-topic="0vbb"><math>
+        <mrow>
+          <mn>0</mn>
+          <mi>ν</mi>
+          <mi>β</mi>
+          <mi>β</mi>
+        </mrow>
+      </math></span>
+      <span class="pub-filter-btn" data-topic="Symmetry-breaking">Symmetry-breaking</span>
+      <span class="pub-filter-btn" data-topic="Structure">Nuclear Structure</span>
+      <span class="pub-filter-btn" data-topic="Emulation">Emulation</span>
+      <span class="pub-filter-btn" data-topic="Experiment">Experiment</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- Papers Container -->
+<div id="pub-papers-container">
+  {% assign pubs_by_year = site.publications | group_by_exp:"publications", "publications.date | date: '%Y'" %}
+  {% for year in pubs_by_year reversed %}  
+    <div class="pub-year-divider" data-divider-year="{{ year.name }}">
+      <span class="year-text">{{ year.name }}</span>
+      <div class="year-line"></div>
+    </div>
+    {% for pub in year.items reversed %}
+      <div class="pub-paper-card" data-year="{{ year.name }}" data-topics="{{ pub.topics | join: ',' }}">
+        {% if pub.doi != "" %}
+        <a href="https://doi.org/{{ pub.doi }}">
+          <div class="pub-paper-image-container">
+            <div class="pub-paper-badge {{ pub.venue_badge }}">{{ pub.venue }}</div>
+            {% if pub.image != "" %}
+            <img src="{{ pub.image | relative_url }}" class="pub-paper-image" alt="{{ pub.image_name }}">
+            {% elsif pub.venue == "Thesis" %}
+            <img src="../images/papers/ubc-logo.png" class="pub-paper-image" alt="Thesis">
+            {% endif %}
+          </div>
+        </a>
+        {% elsif pub.arxiv != "" %}
+        <a href="https://arxiv.org/abs/{{ pub.arxiv }}">
+            <div class="pub-paper-image-container">
+              <div class="pub-paper-badge {{ pub.venue_badge }}">{{ pub.venue }}</div>
+              <img src="{{ pub.image | relative_url }}" class="pub-paper-image" alt="{{ pub.image_name }}">
+            </div>
+        </a>
+        {% else %}
+        <div class="pub-paper-image-container">
+          <div class="pub-paper-badge {{ pub.venue_badge }}">{{ pub.venue }}</div>
+          <img src="{{ pub.image | relative_url }}" class="pub-paper-image" alt="{{ pub.image_name }}">
+        </div>
+        {% endif %}
+        <div class="pub-paper-content">
+          <div class="pub-paper-title-row">
+            <span class="pub-paper-title">{{ pub.title }}</span>
+            <span class="pub-paper-stats">
+              <span class="pub-stat-item" data-arxiv="2508.17102">📖Citations: {{ pub.citation }}</span>
+            </span>
+          </div>
+          <div class="pub-paper-authors">{{ pub.authors }}</div>
+          <div class="pub-paper-links">
+            {% if pub.doi != "" %}<a href="https://doi.org/{{ pub.doi }}" class="pub-btn pub-btn-link">Publication</a>{% endif %}
+            {% if pub.arxiv != "" %}<a href="https://arxiv.org/abs/{{ pub.arxiv }}" class="pub-btn pub-btn-arxiv">arXiv</a>{% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     {% endfor %}
-  {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% endif %}
+</div>
+
+<!-- No Results -->
+<div class="pub-no-results" id="pub-no-results" style="display:none;">
+  🔍 No papers found matching your filters.
+</div>
 
 
+{% raw %}
+<script>
+  (function () {
+    var currentYear = 'all';
+    var currentTopic = 'all';
 
+    function applyFilters() {
+      var papers = document.querySelectorAll('.pub-paper-card');
+      var dividers = document.querySelectorAll('.pub-year-divider');
+      var noResults = document.getElementById('pub-no-results');
+      var visibleCount = 0;
+      var visibleYears = {};
+
+      for (var i = 0; i < papers.length; i++) {
+        var p = papers[i];
+        var pYear = p.getAttribute('data-year');
+        var pTopics = p.getAttribute('data-topics').split(',');
+        var yearOk = (currentYear === 'all' || pYear === currentYear);
+        var topicOk = (currentTopic === 'all' || pTopics.indexOf(currentTopic) >= 0);
+
+        if (yearOk && topicOk) {
+          p.classList.remove('pub-hidden');
+          visibleCount++;
+          visibleYears[pYear] = true;
+        } else {
+          p.classList.add('pub-hidden');
+        }
+      }
+
+      for (var j = 0; j < dividers.length; j++) {
+        var d = dividers[j];
+        var dYear = d.getAttribute('data-divider-year');
+        if (currentYear === 'all') {
+          d.style.display = visibleYears[dYear] ? 'flex' : 'none';
+        } else {
+          d.style.display = (dYear === currentYear && visibleYears[dYear]) ? 'flex' : 'none';
+        }
+      }
+
+      noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+
+    function bindYearBtns() {
+      var btns = document.querySelectorAll('#pub-year-btns .pub-filter-btn');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function () {
+          var allBtns = document.querySelectorAll('#pub-year-btns .pub-filter-btn');
+          for (var j = 0; j < allBtns.length; j++) {
+            allBtns[j].classList.remove('active');
+          }
+          this.classList.add('active');
+          currentYear = this.getAttribute('data-year');
+          applyFilters();
+        });
+      }
+    }
+
+    function bindTopicBtns() {
+      var btns = document.querySelectorAll('#pub-topic-btns .pub-filter-btn');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function () {
+          var allBtns = document.querySelectorAll('#pub-topic-btns .pub-filter-btn');
+          for (var j = 0; j < allBtns.length; j++) {
+            allBtns[j].classList.remove('active');
+          }
+          this.classList.add('active');
+          currentTopic = this.getAttribute('data-topic');
+          applyFilters();
+        });
+      }
+    }
+
+    function bindTagBtns() {
+      var tags = document.querySelectorAll('.pub-paper-tag');
+      for (var i = 0; i < tags.length; i++) {
+        tags[i].addEventListener('click', function () {
+          var topic = this.getAttribute('data-tag-topic');
+          var topicBtns = document.querySelectorAll('#pub-topic-btns .pub-filter-btn');
+          for (var j = 0; j < topicBtns.length; j++) {
+            topicBtns[j].classList.remove('active');
+            if (topicBtns[j].getAttribute('data-topic') === topic) {
+              topicBtns[j].classList.add('active');
+            }
+          }
+          currentTopic = topic;
+          applyFilters();
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () {
+        bindYearBtns();
+        bindTopicBtns();
+        bindTagBtns();
+      });
+    } else {
+      bindYearBtns();
+      bindTopicBtns();
+      bindTagBtns();
+    }
+  })();
+</script>
+{% endraw %}

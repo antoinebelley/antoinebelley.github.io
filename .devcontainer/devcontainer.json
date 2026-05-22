@@ -11,5 +11,11 @@
     ],
     "workspaceFolder": "/usr/src/app",
     "remoteUser": "vscode",
-    "forwardPorts": [4000] // Add port forwarding
+    "forwardPorts": [4000], // Add port forwarding
+    // 1. Ensure the platform is added and gems are installed during build
+    "postCreateCommand": "bundle lock --add-platform x86_64-linux && bundle install",
+    // 2. Automatically launch the background server every time the container starts
+    "postStartCommand": "bundle exec jekyll serve -H 0.0.0.0 -w --config _config.yml,_config_docker.yml",
+    // // Keep this true if you want VS Code to manage the container lifecycle
+    "overrideCommand": true
 }
