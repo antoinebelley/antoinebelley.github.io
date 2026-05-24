@@ -30,15 +30,12 @@ jobs:
           pip install requests
 
       - name: Run script
-        run: pubfromInspire.py # Ensure this matches your script's filename
+        run: python pubfromInspire.py # Ensure this matches your script's filename
 
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@://github.com"
-          
-          # Create the folder if it does not exist yet
-          mkdir -p _publications 
           
           git add _publications/
           
