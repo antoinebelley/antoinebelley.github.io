@@ -49,7 +49,12 @@ def update_publications():
         if date == 2024:
             date = "2024-08-23"
         # Handle Authors (Highlighting your name)
-        authors = [a['full_name'] for a in meta.get('authors', [])[:10]]
+        if len(meta.get('authors', [])) > 10:
+            authors = [a['full_name'] for a in meta.get('authors', [])[:10]]
+            print(authors)
+            authors.append("et al.")
+        else:
+            authors = [a['full_name'] for a in meta.get('authors', [])]
         author_str = ", ".join(authors)
         author_str = author_str.replace(
             "Belley, Antoine", "<span class='highlight'>Belley, Antoine</span>")
