@@ -96,7 +96,7 @@ def update_publications():
                 topics.append("0vbb")
                 break
         # Check if paper is related to symmetry-breaking
-        keywords = ['symmetry-breaking', 'parity-violation', 'schiff moment', 'anapole']
+        keywords = ['symmetry-breaking', 'parity-violation', 'schiff moment', 'anapole', 'electroweak']
         for string in keywords:
             if re.search(string, title, re.IGNORECASE):
                 topics.append("Symmetry-breaking")
