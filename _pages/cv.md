@@ -27,7 +27,9 @@ Education
 
 Professional experience
 ---
-* 2024-present: Postdoctoral Fellow at the Massachusetts Institute of Technology, USA
+* 2026-Present: Postdoctoral Fellow of the @NDB NSF Hub
+* 2026-Present: Postdoctoral Fellow at the Institute for Nuclear Theory, University of Washington, USA
+* 2024-2026: Postdoctoral Fellow at the Massachusetts Institute of Technology, USA
 
 ---
 
