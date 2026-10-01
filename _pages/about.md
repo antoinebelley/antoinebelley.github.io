@@ -15,7 +15,7 @@ header:
 # About me
 
 
-I am a postodoctoral fellow at MIT where I focus on nuclear theory calculations to assist searches for beyond the Standard Model physics using the atomic nucleus and applications of machine learning to accelerate otherwise costly many-body calculations.
+I am a postodoctoral fellow of the @NDB NSF Hub at the Institute For Nuclear Theory where I focus on nuclear theory calculations to assist searches for beyond the Standard Model physics using the atomic nucleus and applications of machine learning to accelerate otherwise costly many-body calculations.
 
 # Recent Publications
 

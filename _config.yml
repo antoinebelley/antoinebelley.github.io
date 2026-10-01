@@ -26,11 +26,11 @@ author:
   avatar           : "profile_pic.jpg"
   name             : "Antoine Belley"
   pronouns         : # example: "she/her"  
-  bio              : "Postdoctoral Fellow at MIT"
+  bio              : "Postdoctoral Fellow at the INT"
   location         : #"Earth"
-  employer         : "MIT"
+  employer         : "Institute for Nuclear Theory"
   uri              : # URL
-  email            : "abelley@mit.edu" 
+  email            : "abelley@uw.edu" 
 
   # Academic websites
   academia         : # URL
